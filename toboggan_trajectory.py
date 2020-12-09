@@ -24,7 +24,7 @@ def  create_slope(input_data, n):
     return [line.strip('\n')*n for line in input_data]
 
 if __name__ == "__main__":
-    with open("Data/toboggan_slope.txt", "r") as input_file:
+    with open("Data/day3.txt", "r") as input_file:
         input_data = input_file.readlines()
 
     # part 1 solution

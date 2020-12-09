@@ -33,7 +33,7 @@ def report_repair_part2(input_data, sum_num):
 
 
 if __name__ == "__main__":
-    input_file = open("Data/report_repair_input.txt", "r")
+    input_file = open("Data/day1.txt", "r")
     input_data = input_file.readlines()
     input_file.close()
 

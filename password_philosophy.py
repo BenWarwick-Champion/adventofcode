@@ -22,7 +22,7 @@ def is_valid_part2(rule, password):
 
 if __name__ == "__main__":
     # Load all the passwords
-    input_file = open('Data/passwords_input.txt')
+    input_file = open('Data/day2.txt')
     input_data = input_file.readlines()
     input_file.close()
 
