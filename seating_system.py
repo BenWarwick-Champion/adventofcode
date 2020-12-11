@@ -2,7 +2,9 @@
 # Day 11: Seating System
 
 import copy
+import time
 
+tic = time.perf_counter()
 with open('Data/day11.txt', 'r') as f:
     seats = [line.strip('\n') for line in f.readlines()]
 
@@ -55,6 +57,8 @@ for line in next_seats:
     occupied += line.count('#')
 
 print("Part 1 solution is:", occupied)
+toc = time.perf_counter()
+print("Time taken:", toc-tic)
 
 output = []
 for line in next_seats:
