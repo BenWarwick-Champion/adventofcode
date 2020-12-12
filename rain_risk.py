@@ -65,5 +65,5 @@ if __name__ == "__main__":
     print("Part 1 solution:", part1) #845
 
     part2 = find_distance(follow_waypoint(data))
-    print("Part 2 solution:", part2) #27016
+    print("Part 2 solution:", part2)
     
