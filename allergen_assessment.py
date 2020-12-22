@@ -28,6 +28,7 @@ if __name__ == "__main__":
     while not all([False for allergen in d if len(d[allergen]) != 1]):
         for allergen in d:
             if len(d[allergen]) == 1:
+                # union
                 identified |= d[allergen]
             else:
                 d[allergen] -= identified
@@ -42,11 +43,6 @@ if __name__ == "__main__":
             allergenic_ingredients += 1
 
     total_allergy_free = len(all_ing) - allergenic_ingredients
-
-    print("Number of unique allergens:", len(all_allergens))
-    print("Number of unique ingredients:", len(all_ingredients))
-    print("Total number of ingredients:", len(all_ing))
-    
     print("Part 1 solution:", total_allergy_free)
 
     ordered_keys = []
@@ -57,5 +53,4 @@ if __name__ == "__main__":
     cdil = []
     for key in ordered_keys:
         cdil.extend(list(d[key]))
-
     print("Part 2 solution:", ",".join(cdil))
