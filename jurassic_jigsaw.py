@@ -23,6 +23,14 @@ def find_edges(piece):
     return edges
 
 
+def flip(piece):
+    pass
+
+
+def rotate(piece):
+    pass
+
+
 if __name__ == "__main__":
     with open("Data/day20.txt", "r") as f:
         data = [l.strip() for l in f.readlines()]
@@ -30,36 +38,35 @@ if __name__ == "__main__":
     pieces = {}
     for ind, line in enumerate(data):
         if 'Tile' in line:
-            #pieces[line[5:-1]] = np.array([list(l) for l in data[ind + 1:ind + 11]]).reshape(10, 10)
             pieces[line[5:-1]] = [list(l) for l in data[ind+1:ind+11]]
-
     edges = {}
     for piece in pieces:
         edges[piece] = find_edges(pieces[piece])
 
-    # Create a unique id for every edge
-    # add them all to a list of uids 
+    # Create a list of uids for every edge
     uids = []
     for piece in edges:
         for i in range(4):
             uids.append(edges[piece][i]) # uid
     
-    # All the outside edges of the puzzle should be unique
-    # assuming 12x12 puzzle we expect 48 outside edges
+    # 12x12 expects 48 outside edges with no match
     outside_edges = []
     for uid in uids:
         if uids.count(uid) == 1:
             outside_edges.append(uid)
     print("Outside edges:", len(outside_edges))
 
+    # Corner pieces have two outside edges
     corners = []
+    d_corners = {}
     for piece in edges:
         count = 0
         count = sum([1 for edge in outside_edges if edge in edges[piece]])
         if count > 1:
             corners.append(piece)
+            d_corners[piece] = [edge for edge in outside_edges if edge in edges[piece]]
 
-    print(corners)
+    print(corners) # '1283', '1511', '1619', '1901'
     total = 1
     for corner in corners:
         total *= int(corner)
