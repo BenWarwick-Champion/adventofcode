@@ -3,12 +3,14 @@
 
 def play_game(cups, moves):
     cup = cups[0]
-    for _ in range(moves):
+    for i in range(moves):
         cups, cup = play_round(cups, cup)
         if cups.index(cup) + 1 >= len(cups):
             cup = cups[0]
         else:
             cup = cups[cups.index(cup) + 1]
+        if i % 100000 == 0:
+            print(f"Completed {i} moves")
     return cups
 
 def play_round(cups, cup):
@@ -39,9 +41,18 @@ def print_labels(cups):
     print("Final labels: " + first[1:] + last)
 
 
-if __name__ == "__main__":
+def init_cups(part2=False):
     with open("Data/day23.txt", "r") as f:
         cups = [int(num) for num in list(f.readline().strip())]
+    if part2:
+        cups.extend(range(cups[-1]+1, 1000000))
+    return cups
 
-    cups = play_game(cups, 100)
-    print_labels(cups) # Part 1: 47382659
+if __name__ == "__main__":
+    p1_cups = init_cups()
+    p1_cups = play_game(p1_cups, 100)
+    print_labels(p1_cups) # Part 1: 47382659
+
+    p2_cups = init_cups(part2=True)
+    p2_cups = play_game(p2_cups, 10000000)
+    print_labels(p2_cups)
