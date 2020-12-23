@@ -45,7 +45,7 @@ def init_cups(part2=False):
     with open("Data/day23.txt", "r") as f:
         cups = [int(num) for num in list(f.readline().strip())]
     if part2:
-        cups.extend(range(cups[-1]+1, 1000000))
+        cups.extend(range(max(cups)+1, 1000000))
     return cups
 
 if __name__ == "__main__":
