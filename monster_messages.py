@@ -1,6 +1,10 @@
 # Advent of Code 2020
 # Day 19: Monster Messages
 
+import re
+
+
+
 if __name__ == "__main__":
     with open("Data/day19.txt", "r") as f:
         data = [line.strip() for line in f.readlines()]
@@ -12,6 +16,4 @@ if __name__ == "__main__":
             rules.setdefault(a, b)
 
     msgs = [line for line in data if line != '' and line[0].isalpha()]
-
-
     print(rules, msgs)
