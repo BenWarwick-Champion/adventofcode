@@ -1,42 +1,50 @@
 # Advent of Code 2020
 # Day 19: Monster Messages
 
+import re
+from functools import lru_cache
+
 def parse_input(data):
     r = {}
     m = [line for line in data if line != '' and line[0].isalpha()]
-    for line in data:
-        if line != '' and line[0].isnumeric():
-            a, b = line.split(': ')
-            if b == '"a"' or b == '"b"':
-                r.setdefault(a, b[1])
-            elif '|' in b:
-                r.setdefault(a, [x.split() for x in b.split('|')])
-            else:
-                r.setdefault(a, b.split())
+    r = [r.setdefault(*line.split(': ')) for line in data if line != '' and line[0].isnumeric()]
     return r, m
 
-def create_match_strings(rule, rules):
-    match_strings = []
-    match_string = ''
-    for i in rules[rule]:
-        match_strings.append(expand_rule(i, rules, match_string))
-    return match_strings
-
-def expand_rule(rule, rules, match_string):
-    if rules[rule] == 'a' or rules[rule] == 'b':
-        match_string += rules[rule]
-        return match_string
+@lru_cache(None)
+def convert_to_re(rule):
+    if '"' in rule:
+        output = rule[1]
+        print(output)
+    elif '|' in rule:
+        branch1, branch2 = rule.split(' | ')
+        a = branch1.split()
+        b = branch2.split()
+        print(a, b)
+        re1 = "(" + ")(".join([get_re(int(i)) for i in a]) + ")"
+        re2 = "(" + ")(".join([get_re(int(i)) for i in b]) + ")"
+        output = f"({re1}|{re2})"
     else:
-        for i in rules[rule]:
-            match_string += expand_rule(i, rules, match_string)
-        return match_string
+        c = [int(i) for i in rule.split()]
+        print(c)
+        output = "(" + ")(".join([get_re(int(i)) for i in c]) + ")"
+    return output
+
+def get_re(rule_id):
+    if rule_id in regexes:
+        return regexes[rule_id]
+    
+    ans = convert_to_re(rules[rule_id])
+    regexes[rule_id] = ans
+    return ans
 
 if __name__ == "__main__":
-    with open("Test/day19.txt", "r") as f:
+    with open("Data/day19.txt", "r") as f:
         data = [line.strip() for line in f.readlines()]
 
     rules, msgs = parse_input(data)
+    regexes = {}
+    re_0 = get_re(0)
 
-    m_strs = create_match_strings('0', rules)
-
+    part1 = sum(1 for msg in msgs if re.fullmatch(re_0, msg))
+    
     print(rules, msgs)
