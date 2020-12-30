@@ -71,12 +71,56 @@ def rotate_left(piece):
 def trim(piece):
     trimmed = []
     for ind, line in enumerate(piece):
-        if ind == 0 or ind == len(piece):
+        if ind == 0 or ind == len(piece)-1:
             continue
         else:
             trimmed.append(line[1:-1])
     return trimmed
 
+def complete_row(puzzle_row:list, r_pieces:set):
+    while len(puzzle_row) < 12:
+        curr = puzzle_row[-1]
+        r_pieces.discard(curr)
+        modified = False
+        curr_edges = find_edges(pieces[curr])
+
+        for piece in r_pieces:
+            if modified:
+                break
+            chk_edges = find_edges(pieces[piece])
+            for edge in chk_edges:
+                # if the right edge of the current piece is the same as the searched piece
+                # add that piece to the row (in the right orientation) 
+                if curr_edges[1] == edge:
+                    i = chk_edges.index(edge)
+                    if i == 0:
+                        pieces[piece] = flip(rotate_left(pieces[piece]))
+                    elif i == 1:
+                        pieces[piece] = flip(rotate_left(rotate_left(pieces[piece])))
+                    elif i == 2:
+                        pieces[piece] = rotate_right(pieces[piece])
+                    else:
+                        pass
+                    puzzle_row.append(piece)
+                    modified = True
+                    break
+
+            for edge in chk_edges:
+                r_edge = [i for i in edge[::-1]]
+                if curr_edges[1] == r_edge:
+                    i = chk_edges.index(edge)
+                    if i == 0:
+                        pieces[piece] = rotate_left(pieces[piece])
+                    elif i == 1:
+                        pieces[piece] = rotate_left(rotate_left(pieces[piece]))
+                    elif i == 2:
+                        pieces[piece] = flip(rotate_right(pieces[piece]))
+                    else:
+                        pieces[piece] = flip(pieces[piece])
+                    puzzle_row.append(piece)
+                    modified = True
+                    break
+    return puzzle_row, r_pieces
 
 if __name__ == "__main__":
     with open("Data/day20.txt", "r") as f:
@@ -121,50 +165,40 @@ if __name__ == "__main__":
         total *= int(corner)
     print("Part 1 solution:", total)
 
-    r_pieces = list(pieces.keys()) # deepcopy(pieces)
+    r_pieces = set(pieces.keys()) # deepcopy(pieces)
     top_left_id = '1283'
     top_left = flip(rotate_left(pieces[top_left_id])) # get this by looking at the data
     pieces[top_left_id] = top_left
-    puzzle_row = [top_left_id] # Just start with a top-left corner
-    while len(puzzle_row) < 12:
-        curr = puzzle_row[-1]
-        r_pieces.remove(curr)
-        modified = False
-        curr_edges = find_edges(pieces[curr])
+    initial_row = [top_left_id] # Just start with a top-left corner
+    
+    # Complete the first row
+    puzzle_row, r_pieces = complete_row(initial_row, r_pieces)
 
-        for piece in r_pieces:
-            if modified:
-                break
-            chk_edges = find_edges(pieces[piece])
-            for edge in chk_edges:
-                # if the right edge of the current piece is the same as the searched piece
-                # add that piece to the row (in the right orientation) 
-                if curr_edges[1] == edge:
-                    i = chk_edges.index(edge)
-                    if i == 0:
-                        pieces[piece] = flip(rotate_left(pieces[piece]))
-                    elif i == 1:
-                        pieces[piece] = flip(rotate_left(rotate_left(pieces[piece])))
-                    elif i == 2:
-                        pieces[piece] = rotate_right(pieces[piece])
-                    else:
-                        pass
-                    puzzle_row.append(piece)
-                    break
+    # Transpose the first row to the first column 
+    # then use those pieces to complete each row
+    puzzle = []
+    for id in puzzle_row[::-1]:
+        pieces[id] = rotate_left(pieces[id])
+        row, r_pieces = complete_row([id], r_pieces)
+        puzzle.append(row)
 
-            for edge in chk_edges:
-                r_edge = [i for i in edge[::-1]]
-                if curr_edges[1] == r_edge:
-                    i = chk_edges.index(edge)
-                    if i == 0:
-                        pieces[piece] = rotate_left(pieces[piece])
-                    elif i == 1:
-                        pieces[piece] = rotate_left(rotate_left(pieces[piece]))
-                    elif i == 2:
-                        pieces[piece] = flip(rotate_right(pieces[piece]))
-                    else:
-                        pieces[piece] = flip(pieces[piece])
-                    puzzle_row.append(piece)
-                    break
+    # Time to assemble the image
+    image = []
+    image_temp = []
+    for i in range(12):
+        image_col = []
+        for r in range(len(puzzle)):
+            sub_image = trim(pieces[puzzle[i][r]])
+            image_col.extend(sub_image)
+        image_temp.append(image_col)
 
-    print(puzzle_row)
+    for c in range(len(image_temp[0])):
+        image_row = []
+        for r in range(len(image_temp)):
+            image_row.extend(image_temp[r][c])
+        image.append(image_row)
+    
+    # Search the image for sea monsters
+    # Assume the monsters don't overlap
+
+    
