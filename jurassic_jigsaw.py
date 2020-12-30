@@ -122,6 +122,25 @@ def complete_row(puzzle_row:list, r_pieces:set):
                     break
     return puzzle_row, r_pieces
 
+def find_monsters(image, monster):
+    m_height = len(monster)
+    m_width = len(monster[0])
+    h = len(image)
+    w = len(image[0])
+    monsters = 0
+
+    for r in range(h - m_height):
+        for c in range(w - m_width):
+            count = 0
+            for i in range(m_height):
+                for j in range(m_width):
+                    if monster[i][j] == image[r+i][c+j]:
+                        count += 1
+            if count == 15:
+                monsters += 1
+    return monsters
+
+
 if __name__ == "__main__":
     with open("Data/day20.txt", "r") as f:
         data = [l.strip() for l in f.readlines()]
@@ -183,22 +202,31 @@ if __name__ == "__main__":
         puzzle.append(row)
 
     # Time to assemble the image
-    image = []
-    image_temp = []
-    for i in range(12):
-        image_col = []
-        for r in range(len(puzzle)):
-            sub_image = trim(pieces[puzzle[i][r]])
-            image_col.extend(sub_image)
-        image_temp.append(image_col)
-
-    for c in range(len(image_temp[0])):
-        image_row = []
-        for r in range(len(image_temp)):
-            image_row.extend(image_temp[r][c])
-        image.append(image_row)
+    image = [['0']*96 for _ in range(96)] # 96 because 12 pieces * size(8) sub_images
+    for r in range(len(puzzle)):
+        for c in range(len(puzzle[0])):
+            sub_image = trim(pieces[puzzle[r][c]])
+            for i in range(len(sub_image)):
+                for j in range(len(sub_image[0])):
+                    image[(r*8)+i][(c*8)+j] = sub_image[i][j]
     
     # Search the image for sea monsters
     # Assume the monsters don't overlap
+    sea_monster = """
+                  # 
+#    ##    ##    ###
+ #  #  #  #  #  #   """.splitlines()[1:]
 
-    
+    monster = [list(line) for line in sea_monster]
+    rough_sea = sum(sum(1 for c in r if c == '#') for r in image)
+    monster_count = 0
+    loops = 0
+    while monster_count == 0:
+        if loops == 4:
+            image = flip(image)
+        image = rotate_right(image)
+        monster_count = find_monsters(image, monster)
+        loops += 1
+
+    part2 = rough_sea - monster_count*15
+    print("Part 2 solution:", part2)
