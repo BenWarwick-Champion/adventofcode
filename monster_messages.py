@@ -27,6 +27,11 @@ def convert_to_re(rule):
     return output
 
 def get_re(rule_id):
+    if rule_id == 8:
+        return re_8
+    elif rule_id == 11:
+        return re_11
+
     if rule_id in regexes:
         return regexes[rule_id]
     regexes[rule_id] = convert_to_re(rules[rule_id])
@@ -38,7 +43,18 @@ if __name__ == "__main__":
 
     rules, msgs = parse_input(data)
     regexes = {}
-    re_0 = get_re(0)
 
-    part1 = sum(1 for msg in msgs if re.fullmatch(re_0, msg))
-    print("Part 1 solution:", part1)
+    # Uncomment for part 1
+    # re_0 = get_re(0)
+    # part1 = sum(1 for msg in msgs if re.fullmatch(re_0, msg))
+    # print("Part 1 solution:", part1) # 190
+
+    re_42 = get_re(42)
+    re_8 = f"({re_42})+"
+
+    re_31 = get_re(31)
+    re_11 = '(' + '|'.join(f"({re_42}){{{n}}}({re_31}){{{n}}}" for n in range(1, 11)) + ')'
+
+    re_0 = get_re(0)
+    part2 = sum(1 for msg in msgs if re.fullmatch(re_0, msg))
+    print("Part 2 solution:", part2) # 311
