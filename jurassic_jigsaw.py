@@ -1,9 +1,6 @@
 # Advent of Code 2020
 # Day 20: Jurassic Jigsaw
 
-from pprint import pprint
-from copy import deepcopy
-
 def uid_edge(edge):
     r_edge = [x for x in reversed(edge)]
     uid = min(edge, r_edge)
