@@ -40,3 +40,42 @@ Taking inspiration from the name of the problem I created a function which rebui
 I took a fairly straighforward approach to the part 2 of this problem. I created a list of all of the seats and then sorted it. This meant that I could iterate through each seat and check for a skipped one - the missing seats at the beginning and end were neutralised.
 
 ## Day 6: Custom Customs
+
+## Day 7: Handy Haversacks
+
+## Day 8: Handheld Halting
+
+## Day 9: Encoding Error
+
+## Day 10: Adapter Array
+
+## Day 11: Seating System
+
+## Day 12: Rain Risk
+
+## Day 13: Shuttle Search
+
+## Day 14: Docking Data
+
+## Day 15: Rambunctious Recitation
+
+## Day 16: Ticket Translation
+
+## Day 17: Conway Cubes
+
+## Day 18: Operation Order
+
+## Day 19: Monster Messages
+
+## Day 20: Jurassic Jigsaw
+
+## Day 21: Allergen Assessment
+
+## Day 22: Crab Combat
+
+## Day 23: Crab Cups
+
+## Day 24: Lobby Layout
+
+## Day 25: Combo Breaker
+
