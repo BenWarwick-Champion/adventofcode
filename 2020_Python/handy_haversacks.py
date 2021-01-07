@@ -22,20 +22,18 @@ if __name__ == "__main__":
     
     # Part 1
     shiny_bags = []
-    colour_list = []
+    uniques = set()
     for colour in colours:
         if is_shiny(colour, 'shiny gold'):
             shiny_bags.append(colour)
-            colour_list.append(colour)
+            uniques.add(colour)
 
     while shiny_bags:
         test_colour = shiny_bags.pop()
         for colour in colours:
             if is_shiny(colour, test_colour):
                 shiny_bags.append(colour)
-                colour_list.append(colour)
-
-    uniques = list(dict.fromkeys(colour_list))
+                uniques.add(colour)
 
     print("The number of bags that can contain a shiny gold bag:", len(uniques)) # 211 is correct
 
