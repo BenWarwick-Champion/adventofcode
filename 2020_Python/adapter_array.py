@@ -31,23 +31,3 @@ if __name__ == "__main__":
     memory = {}
     part2 = permutations_from(0)
     print("Part 2 solution:", part2)
-
-    # counts = []
-    # i = 0
-    # while i < len(adapters[:-2]):
-    #     j = i + 1
-    #     count = 0
-    #     while adapters[j] - adapters[i] <= 3 and j != len(adapters[:-1]):
-    #         count = j - i
-    #         j += 1
-    #     if count == 3:
-    #         counts.append(4)
-    #     else:
-    #         counts.append(count)
-    #     i = j - 1
-
-    # total = 1
-    # for num in counts:
-    #     total *= num
-
-    # print(total) #8, 19208
