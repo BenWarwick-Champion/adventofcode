@@ -40,14 +40,33 @@ Taking inspiration from the name of the problem I created a function which rebui
 I took a fairly straighforward approach to the part 2 of this problem. I created a list of all of the seats and then sorted it. This meant that I could iterate through each seat and check for a skipped one - the missing seats at the beginning and end were neutralised.
 
 ## Day 6: Custom Customs
+### Part 1:
+This problem highlighted the usefulness of pythons sets to me. After parsing the inputs into separate groups, a simple function just added each response to a set of questions. The lack of duplicates in sets meant that each set could then be counted as the solution.
+### Part 2:
+With sets the extension to this problem was straightforward. The questions set was instead composed of the intersection of the sets for each person in the group.
+
+After completing this problem I went onto the r/adventofcode subreddit and saw some far more compact solutions. Feeling inspired I wrote custom_customs_but_smaller.py and managed to reduce each part to a single line using map().
 
 ## Day 7: Handy Haversacks
+### Part 1:
+Solved the first problem using a stack. I first wrote a simple is_shiny() function to check if a bag contained a shiny gold one. A first pass through all the colours allowed me to prime the stack with those colours which directly contained a shiny gold bag. After that I popped each colour off the stack and searched for bags containing that colour adding all results back onto the stack as well as adding to a set. With the stack empty the set holds each unique colour that could hold a shiny gold bag.
+### Part 2:
+This was the first day where the problem took a little bit more thinking for me as I was not familiar with writing recursive solutions. It is one thing to see that it can be solved recursively and another to write it. Fortunately I was able to write a simple recursive function without too much trouble and in the end I found it more difficult to wrangle the data into the dictionary format which I wanted.
 
 ## Day 8: Handheld Halting
+### Part 1 & 2:
+There was nothing too difficult about this day, simply implementing the instructions as described for both parts.
 
 ## Day 9: Encoding Error
+### Part 1 & 2:
+Again, nothing groundbreaking from this day. Although for part 2 I had a foolish bug for a while where I returned the sum of the first and last elements in the contiguous list before I realised that the question was asking for the sum of the max and min instead.
 
 ## Day 10: Adapter Array
+### Part 1:
+After sorting the array this problem was trivial.
+
+### Part 2:
+I fared better writing the recursive function for this problem, unfortunately that was not enough. This time it was necessary to implement memoisation as well to avoid too much recalculation and to get the algorithm to run in reasonable time. After discovering what it was it did not take long to integrate it with my function.
 
 ## Day 11: Seating System
 
