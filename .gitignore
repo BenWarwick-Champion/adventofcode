@@ -1,9 +1,24 @@
+# Project Folders
 .DS_Store
 .vscode
-/venv/
-Help/
-Reference/
+venv/
+
+# Hide Inputs
+# (Refer to adventofcode.com to get your own inputs)
 Data/
 Test/
+
+# Subreddit Help
+Help/
+Reference/
+
+# Python Folder
 __pycache__/
-bin/
+*.pyc
+
+# C++ folder
+CMakeCache.txt
+CMakeFiles
+*.cmake
+Makefile
+advent2020
