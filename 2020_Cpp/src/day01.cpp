@@ -1,5 +1,7 @@
 #include "advent2020.h"
 
+// Day 1: Report Repair
+
 output_t day01(input_t in) {
     int part1 = 0, part2 = 0;
     auto numbers = parse::str_to_vec(in);
@@ -9,6 +11,9 @@ output_t day01(input_t in) {
     for (int i = 0; i < numbers.size(); i++) {
         set.insert(numbers[i]);
     }
+
+    // Sort the vector to take advantage of the unbalanced input
+    std::sort(numbers.begin(), numbers.end());
 
     // Part 1 - using ranges
     for (auto num : numbers) {
@@ -21,6 +26,8 @@ output_t day01(input_t in) {
 
     // Part 2 - using ranges
     for (auto x : numbers) {
+        if (part2 != 0)
+            break;
         auto test = 2020 - x;
         for (auto y : numbers) {
             auto z = test - y;
