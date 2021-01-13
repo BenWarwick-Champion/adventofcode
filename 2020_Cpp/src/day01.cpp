@@ -10,22 +10,22 @@ output_t day01(input_t in) {
         set.insert(numbers[i]);
     }
 
-    // Part 1
-    for (int i = 0; i < numbers.size(); i++) {
-        int res = 2020 - numbers[i];
+    // Part 1 - using ranges
+    for (auto num : numbers) {
+        auto res = 2020 - num;
         if (set.find(res) != set.end()) {
-            part1 = numbers[i] * res;
+            part1 = num * res;
             break;
         }
     }
 
-    // Part 2
-    for (int i = 0; i < numbers.size(); i++) {
-        int test = 2020 - numbers[i];
-        for (int j = 0; j < numbers.size(); j++) {
-            int res = test - numbers[j];
-            if (set.find(res) != set.end()) {
-                part2 = numbers[j] * numbers[i] * res;
+    // Part 2 - using ranges
+    for (auto x : numbers) {
+        auto test = 2020 - x;
+        for (auto y : numbers) {
+            auto z = test - y;
+            if (set.find(z) != set.end()) {
+                part2 = x * y * z;
                 break;
             }
         }
