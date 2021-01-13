@@ -20,3 +20,9 @@ I have a few goals:
 ### References
  - [u/askalski on Reddit](https://www.reddit.com/r/adventofcode/comments/kkq6r3/2020_optimized_solutions_in_c_291_ms_total/)
  - [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
+
+ ### Daily Notes
+ #### Day 1
+  - Remember to build for release when testing performance.
+  - Remember to exit ALL loops when the result is found.
+ 
