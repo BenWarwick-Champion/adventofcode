@@ -13,8 +13,7 @@ int main(void) {
         auto &A = advent2020[day - 1];
         if (!A.fn) continue;
 
-        char filename[64];
-        sprintf(filename, "Data/day%02d.txt", day);
+        std::string filename = "../Data/day" + std::to_string(day) + ".txt";
 
         auto input = load_input(filename);
         auto output = A.fn(input);
@@ -29,14 +28,25 @@ int main(void) {
 
 input_t load_input(const std::string &filename) {
     input_t in;
-    std::ifstream file (filename.data(), std::ifstream::in);
+    std::ifstream file (filename.c_str(), std::ifstream::in);
     if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
-            in.str += line;
+        file.seekg(0, file.end);
+        in.len = file.tellg();
+        file.seekg(0, file.beg);
+
+        char* buffer = new char[in.len];
+        file.read(buffer, in.len);
+
+        if(file)
+        {
+            std::cout << "All chars read successfully" << std::endl;
         }
-        in.len = in.str.length();
+        else
+        {
+            std::cout << "Error: Only " << file.gcount() << " could be read";
+        }
         file.close();
+        in.str = buffer;
     }
     return in;
 }
