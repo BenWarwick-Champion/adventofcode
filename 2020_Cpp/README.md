@@ -25,4 +25,5 @@ I have a few goals:
  #### Day 1
   - Remember to build for release when testing performance.
   - Remember to exit ALL loops when the result is found.
+  - Take advantage of unbalanced inputs.
  
