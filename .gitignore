@@ -7,6 +7,7 @@ venv/
 # (Refer to adventofcode.com to get your own inputs)
 Data/
 Test/
+input/
 
 # Subreddit Help
 Help/
@@ -23,3 +24,6 @@ CMakeFiles
 Makefile
 advent2020
 build/
+
+# Rust folder
+target/
