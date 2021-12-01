@@ -1,7 +1,6 @@
 # Project Folders
 .DS_Store
 .vscode
-venv/
 
 # Hide Inputs
 # (Refer to adventofcode.com to get your own inputs)
@@ -16,6 +15,7 @@ Reference/
 # Python Folder
 __pycache__/
 *.pyc
+env/
 
 # C++ folder
 CMakeCache.txt
