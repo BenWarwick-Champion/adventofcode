@@ -18,6 +18,9 @@ def part2(positions):
     total_cost += cost
   return total_cost
 
+def calc_triangle_fuel_cost(positions):
+  return sum(sum(cost for cost in range(abs(pos - int(statistics.mean(positions))) + 1)) for pos in positions)
+
 if __name__ == "__main__":
   with open('./input/day07.txt') as f:
     data = [int(num) for num in f.read().split(',')]
@@ -26,4 +29,5 @@ if __name__ == "__main__":
   print(part1(data)) # 351901
   print('---- Part Two ----')
   print(part2(data)) # 101079875
+  print(calc_triangle_fuel_cost(data))
 
