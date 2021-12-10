@@ -1,27 +1,19 @@
 # Advent of Code 2021
 # Day 10:
 
+opening_pairs = {'(': ')', '[': ']', '{': '}', '<': '>'}
+closing_pairs = {')': '(', ']': '[', '}': '{', '>': '<'}
+
 def score_char(char):
-  match char:
-    case ')': return 3
-    case ']': return 57
-    case '}': return 1197
-    case '>': return 25137
-  print('Unknown char:', char)
-  return 0
+  char_scores = {')': 3, ']': 57, '}': 1197, '>': 25137}
+  return char_scores[char]
 
 def score_ending(ending):
+  char_scores = {')': 1, ']': 2, '}': 3, '>': 4}
   score = 0
   for char in ending:
     score *= 5
-    if char == ')':
-      score += 1
-    elif char == ']':
-      score += 2
-    elif char == '}':
-      score += 3
-    elif char == '>':
-      score += 4
+    score += char_scores[char]
   return score
 
 def is_corrupted(chunk):
@@ -31,13 +23,7 @@ def is_corrupted(chunk):
       stack.append(char)
     else:
       last = stack.pop()
-      if last == '<' and char != '>':
-        return score_char(char)
-      if last == '{' and char != '}':
-        return score_char(char)
-      if last == '[' and char != ']':
-        return score_char(char)
-      if last == '(' and char != ')':
+      if closing_pairs[char] != last:
         return score_char(char)
   return False
 
@@ -51,15 +37,7 @@ def finish_chunk(chunk):
 
   ending = []
   for char in stack[::-1]:
-    if char == '<':
-      ending.append('>')
-    elif char == '{':
-      ending.append('}')
-    elif char == '[':
-      ending.append(']')
-    elif char == '(':
-      ending.append(')')
-  
+    ending.append(opening_pairs[char])
   return score_ending(ending)
 
 
@@ -78,6 +56,6 @@ if __name__ == "__main__":
     data = [list(line.strip()) for line in f.readlines()]
 
   print('---- Part One ----')
-  print(part1(data))
+  print(part1(data)) # 265527
   print('---- Part Two ----')
-  print(part2(data))
+  print(part2(data)) # 3969823589
