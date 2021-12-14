@@ -54,5 +54,5 @@ if __name__ == "__main__":
   print('---- Part One ----')
   print(part1(coords, folds)) # 785
   print('---- Part Two ----')
-  print(part2(coords, folds))
+  print(part2(coords, folds)) # FJAHJGAH
 
