@@ -33,23 +33,14 @@ def init_points(data):
       points[f'{r},{c}'] = data[r][c]
   return points
 
-def part1(data, algo):
+def solve(data, algo, part2=False):
   points = init_points(data)
-  for i in range(2):
-    if i % 2 == 0:
-      default = '#'
+  iterations = 50 if part2 else 2
+  for i in range(iterations):
+    if i % 2 == 0 or algo[0] == '.':
+      default = algo[0]
     else:
-      default = '.'
-    points = apply_algo(points, algo, default)
-  return sum([1 for point in points if points[point] == '#'])
-
-def part2(data, algo):
-  points = init_points(data)
-  for i in range(50):
-    if i % 2 == 0:
-      default = '#'
-    else:
-      default = '.'
+      default = algo[-1]
     points = apply_algo(points, algo, default)
   return sum([1 for point in points if points[point] == '#'])
 
@@ -59,7 +50,7 @@ if __name__ == '__main__':
     data = [list(line) for line in data.splitlines()]
 
   print('---- Part One ----')
-  print(part1(data, algo)) # 5489
+  print(solve(data, algo)) # 5489
   print('---- Part Two ----')
-  print(part2(data, algo)) # 19066
+  print(solve(data, algo, part2=True)) # 19066
 
