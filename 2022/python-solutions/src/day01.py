@@ -1,41 +1,24 @@
 # Advent of Code 2022
 #  Day 01:
 
-def find_max_calories(carry_list):
-    elf = 0
-    elves = {0: 0}
-    for calories in carry_list:
-        if (calories == ''):
-            elf += 1
-            elves[elf] = 0
-            continue
-
-        elves[elf] += int(calories)
-
-    return max(elves.values())
+def count_calories(elves):
+    calorie_list = []
+    for elf in elves:
+        calories = sum([int(c) for c in elf.split('\n')])
+        calorie_list.append(calories)
+    return sorted(calorie_list)
 
 
-def find_max_three_calories(carry_list):
-    elf = 0
-    elves = {0: 0}
-    for calories in carry_list:
-        if (calories == ''):
-            elf += 1
-            elves[elf] = 0
-            continue
-
-        elves[elf] += int(calories)
-
-    calorie_list = [count for count in elves.values()]
-    calorie_list.sort()
-    return sum(calorie_list[-3:])
+def count_calories_concisely(elves):
+    return sorted([sum([int(c) for c in elf.split('\n')]) for elf in elves])
 
 
 if __name__ == "__main__":
     with open('./input/day01.txt') as f:
-        data = [line.strip() for line in f.readlines()]
-        print('---- Part One ----')
-        print(find_max_calories(data))
+        new_data = f.read().split('\n\n')
 
-        print('---- Part Two ----')
-        print(find_max_three_calories(data))
+    print('---- Part One ----')
+    print(count_calories(new_data)[-1])  # 67658
+
+    print('---- Part Two ----')
+    print(sum(count_calories(new_data)[-3:]))  # 200158
