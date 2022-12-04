@@ -1,5 +1,5 @@
 # Advent of Code 2022
-#  Day 01:
+# Day 01:
 
 def count_calories(elves):
     calorie_list = []
