@@ -27,3 +27,6 @@ build/
 
 # Rust folder
 target/
+
+# Secrets
+session.cookie
