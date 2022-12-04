@@ -21,7 +21,7 @@ env/
 CMakeCache.txt
 CMakeFiles
 *.cmake
-Makefile
+2020_Cpp/Makefile
 advent2020
 build/
 
