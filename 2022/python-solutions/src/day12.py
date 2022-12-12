@@ -24,7 +24,7 @@ def parse_map(data):
     return nodes, start, end
 
 
-def shortest_path(nodes, start, end):
+def shortest_path(nodes, start, end, part=1):
     distances = {coord: None for coord in nodes}  # using None as unvisited
 
     # Determine neighbours of each node
@@ -32,8 +32,12 @@ def shortest_path(nodes, start, end):
     for node in nodes:
         for delta in [1, -1, 1j, -1j]:
             val = nodes.get(node + delta)
-            if val and ord(val) - ord(nodes[node]) <= 1:
-                neighbours[node].append(node + delta)
+            if part == 1:
+                if val and ord(val) - ord(nodes[node]) <= 1:
+                    neighbours[node].append(node + delta)
+            else:
+                if val and (ord(val) - ord(nodes[node]) == 0 or ord(val) - ord(nodes[node]) == -1):
+                    neighbours[node].append(node + delta)
 
     Q = deque()
     Q.append(start)
@@ -46,15 +50,22 @@ def shortest_path(nodes, start, end):
                 distances[neighbour] = distances[current] + 1
                 Q.append(neighbour)
 
-    return distances[end]
+            if part == 2 and nodes[neighbour] == 'a':
+                return distances[neighbour]
+
+    return distances[end] if part == 1 else distances[complex(40, 1)]
 
 
 if __name__ == "__main__":
     with open("input/day12.txt") as f:
         data = f.readlines()
 
+    nodes, start, end = parse_map(data)
     print('---- Part One ----')
-    pprint(shortest_path(*parse_map(data)))
+    print(shortest_path(nodes, start, end))
 
     print('---- Part Two ----')
-    print()
+    # By inspection know that start pos will be the leftmost
+    # column of the input... so just check them all ¯\_(ツ)_/¯
+    print(min([shortest_path(nodes, complex(a, 0), end)
+          for a in range(1, 41)]))
