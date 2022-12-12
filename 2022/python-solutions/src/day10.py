@@ -49,7 +49,6 @@ def draw_CRT(x_map):
         lines.append(''.join(line) + '\n')
 
     return ''.join(lines)
-    # return ''.join(screen)
 
 
 if __name__ == "__main__":
