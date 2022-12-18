@@ -1,13 +1,26 @@
 # Advent of Code 2022
 # Day 18
 
-def count_sides(cubes):
+def count_sides(cubes, part=1):
     side_count = 0
     for cube in cubes:
         for side in sides(*cube):
             if side not in cubes:
                 side_count += 1
-    return side_count
+
+    if part == 1:
+        return side_count
+
+    seen = set()
+    todo = [(-1, -1, -1)]
+
+    while todo:
+        here = todo.pop()
+        todo += [s for s in (sides(*here) - cubes - seen)
+                 if all(-1 <= c <= 25 for c in s)]
+        seen |= {here}
+
+    return sum((s in seen) for c in cubes for s in sides(*c))
 
 
 def sides(x, y, z):
@@ -31,4 +44,4 @@ if __name__ == "__main__":
     print(count_sides(cubes))
 
     print('---- Part Two ----')
-    print()
+    print(count_sides(cubes, 2))
