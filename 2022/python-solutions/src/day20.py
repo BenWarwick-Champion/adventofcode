@@ -4,14 +4,15 @@
 from collections import deque
 
 
-def mix(original):
+def mix(original, times=1):
     nums = deque((i, n) for i, n in enumerate(original))
 
-    for i, n in enumerate(original):
-        idx = nums.index((i, n))
-        nums.remove((i, n))
-        nums.rotate(-n)
-        nums.insert(idx, (i, n))
+    for _ in range(times):
+        for i, n in enumerate(original):
+            idx = nums.index((i, n))
+            nums.remove((i, n))
+            nums.rotate(-n)
+            nums.insert(idx, (i, n))
 
     return nums
 
@@ -19,7 +20,6 @@ def mix(original):
 def grove_coords(nums):
     final = [n for _, n in nums]
     zero_idx = final.index(0)
-
     return [final[(zero_idx + i * 1000) % len(nums)] for i in [1, 2, 3]]
 
 
@@ -30,26 +30,5 @@ if __name__ == "__main__":
     print('---- Part One ----')
     print(sum(grove_coords(mix(data))))  # 7395
     print('---- Part Two ----')
-    print()
-
-
-# 1 moves between 2 and -3:
-# 2, 1, -3, 3, -2, 0, 4
-
-# 2 moves between -3 and 3:
-# 1, -3, 2, 3, -2, 0, 4
-
-# -3 moves between -2 and 0:
-# 1, 2, 3, -2, -3, 0, 4
-
-# 3 moves between 0 and 4:
-# 1, 2, -2, -3, 0, 3, 4
-
-# -2 moves between 4 and 1:
-# 1, 2, -3, 0, 3, 4, -2
-
-# 0 does not move:
-# 1, 2, -3, 0, 3, 4, -2
-
-# 4 moves between -3 and 0:
-# 1, 2, -3, 4, 0, 3, -2
+    DECRYPTION_KEY = 811589153  # 1640221678213
+    print(sum(grove_coords(mix([n * DECRYPTION_KEY for n in data], 10))))
