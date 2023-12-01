@@ -11,3 +11,9 @@ This was my first year discovering the AoC. I completed all 25 days in Python an
 ## 2021
 
 Looking to try and solve the puzzles for each day in both Python and Rust, finishing a solution in at least one language within 24 hours of the puzzle unlocking. Rust is totally new for me this year so I am expecting a steep learning curve!
+
+## 2022
+
+Much busier year in general and found it a bit harder to find the time especially in later days. Still had a blast but very much just hacked together anything that worked when I could!
+
+## 2023
