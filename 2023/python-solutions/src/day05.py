@@ -47,6 +47,7 @@ def part_one(raw_data: list[str]):
     return min(locations)
 
 def parse_seed_ranges(seeds: list[str]):
+    print(sum(seeds[1::2]))
     pairs = list(zip(seeds[0::2], seeds[1::2]))
     
     # Hacky "pen & paper" solution using approximation to find the
