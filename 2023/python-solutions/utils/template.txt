@@ -1,0 +1,13 @@
+# Advent of Code 2023
+${day}
+
+
+if __name__ == "__main__":
+${input}
+        data = f.read()
+    
+    print('---- Part One ----')
+    print()
+
+    print('---- Part Two ----')
+    print()
