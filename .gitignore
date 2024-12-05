@@ -17,6 +17,7 @@ Reference/
 __pycache__/
 *.pyc
 env/
+.venv/
 
 # C++ folder
 CMakeCache.txt
