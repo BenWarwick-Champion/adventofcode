@@ -82,116 +82,12 @@ def part_two(raw_data):
                     candidates.append(a)
     return min(candidates)
 
-    while len(output) < len(instructions):
-        registers[0] *= 10
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    while output[-1] != instructions[-1]:
-        registers[0] += 10**(len(str(registers[0])) - 4)
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    while \
-        output[-6] != instructions[-6] or \
-        output[-5] != instructions[-5] or \
-        output[-4] != instructions[-4] or \
-        output[-3] != instructions[-3] or \
-        output[-2] != instructions[-2] or \
-        output[-1] != instructions[-1]:
-        registers[0] += 10**(len(str(registers[0])) - 7)
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    while \
-        output[-9] != instructions[-9] or \
-        output[-8] != instructions[-8] or \
-        output[-7] != instructions[-7] or \
-        output[-6] != instructions[-6] or \
-        output[-5] != instructions[-5] or \
-        output[-4] != instructions[-4] or \
-        output[-3] != instructions[-3] or \
-        output[-2] != instructions[-2] or \
-        output[-1] != instructions[-1]:
-        registers[0] += 10**(len(str(registers[0])) - 8)
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    while \
-        output[-12] != instructions[-12] or \
-        output[-11] != instructions[-11] or \
-        output[-10] != instructions[-10] or \
-        output[-9] != instructions[-9] or \
-        output[-8] != instructions[-8] or \
-        output[-7] != instructions[-7] or \
-        output[-6] != instructions[-6] or \
-        output[-5] != instructions[-5] or \
-        output[-4] != instructions[-4] or \
-        output[-3] != instructions[-3] or \
-        output[-2] != instructions[-2] or \
-        output[-1] != instructions[-1]:
-        registers[0] += 10**(len(str(registers[0])) - 11)
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    while \
-        output[-15] != instructions[-15] or \
-        output[-14] != instructions[-14] or \
-        output[-13] != instructions[-13] or \
-        output[-12] != instructions[-12] or \
-        output[-11] != instructions[-11] or \
-        output[-10] != instructions[-10] or \
-        output[-9] != instructions[-9] or \
-        output[-8] != instructions[-8] or \
-        output[-7] != instructions[-7] or \
-        output[-6] != instructions[-6] or \
-        output[-5] != instructions[-5] or \
-        output[-4] != instructions[-4] or \
-        output[-3] != instructions[-3] or \
-        output[-2] != instructions[-2] or \
-        output[-1] != instructions[-1]:
-        registers[0] += 10**(len(str(registers[0])) - 14)
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-
-    while output != instructions:
-        registers[0] += 1
-        _, _, _, output = run(registers, instructions)
-
-    print('Registers:', registers)
-    print('Instructions:', instructions)
-    print('Output:      ', output)
-
-    return registers
-
 if __name__ == "__main__":
     with open("input/day17.txt") as f:
         raw_data = f.read()
     
     print('---- Part One ----')
-    print(part_one(raw_data))
+    print(part_one(raw_data)) # 2,3,4,7,5,7,3,0,7
 
     print('---- Part Two ----')
-    print(part_two(raw_data))
-
-    # 207976803417103 too high
-    # 190384617372687 too high
+    print(part_two(raw_data)) # 190384609508367
