@@ -57,7 +57,6 @@ def move_guard(grid, guard_pos, guard_dir):
             continue
 
         curr_pos = next_pos
-        # print('Moving to:', curr_pos)
         visited.add((curr_pos, curr_dir))
     return visited, loop
 
@@ -72,14 +71,10 @@ def part_two(raw_data):
 
     options = []
     i=1
-    total = len(set([pos for pos, _ in visited]))
     for pos in set([pos for pos, _ in visited]):
-        print('Checking:', i, 'of', total)
-        
         if pos == guard_pos:
             i += 1
             continue
-        # print('Checking:', pos)
         old_val = grid[pos]
         grid[pos] = 'N'
         _, loop = move_guard(grid, guard_pos, guard_dir)
@@ -88,7 +83,6 @@ def part_two(raw_data):
         grid[pos] = old_val
         i += 1
 
-        
     return len(options)
 
 if __name__ == "__main__":
